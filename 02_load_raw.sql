@@ -8,10 +8,11 @@ FROM (
         $5 AS STATUS,
         TO_VARCHAR(CURRENT_TIMESTAMP(), 'YYYYMMDDHH24MISS') AS BATCH_ID,
         CURRENT_TIMESTAMP() AS LOAD_TIMESTAMP
-    FROM @RAW.raw_stage/orders_2026_05_20.csv
+    FROM @RAW.raw_stage
 )
 FILE_FORMAT = (
     TYPE = CSV
     SKIP_HEADER = 1
     FIELD_OPTIONALLY_ENCLOSED_BY = '"'
-);
+)
+PATTERN = '.*orders_.*\.csv';
